@@ -104,14 +104,7 @@ paths:
       deprecated: false
       security:
         - bearer: []
-  /jobs/{id}:
-    parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-        description: The job ID
+  /jobs/643e0f17724f8a29275e9062:
     get:
       tags:
         - jobs
@@ -152,7 +145,14 @@ paths:
       deprecated: false
       security:
         - bearer: []
-  /jobs/643e08cc1c6c1d70d59e68ed:
+  /job/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
     delete:
       tags:
         - jobs
