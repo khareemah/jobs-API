@@ -4,13 +4,13 @@ info:
   contact: {}
   version: '1.0'
 servers:
-  - url: https://jobs-api-zetu.onrender.com
-    variables: {}
+- url: https://jobs-api-zetu.onrender.com/api/v1
+  variables: {}
 paths:
   /auth/register:
     post:
       tags:
-        - auth
+      - auth
       summary: register user
       operationId: registeruser
       parameters: []
@@ -20,11 +20,11 @@ paths:
           application/json:
             schema:
               allOf:
-                - $ref: '#/components/schemas/registeruserrequest'
-                - example:
-                    name: chris
-                    email: chris@gmail.com
-                    password: secret
+              - $ref: '#/components/schemas/registeruserrequest'
+              - example:
+                  name: chris
+                  email: chris@gmail.com
+                  password: secret
             example:
               name: chris
               email: chris@gmail.com
@@ -39,7 +39,7 @@ paths:
   /auth/login:
     post:
       tags:
-        - auth
+      - auth
       summary: login user
       operationId: loginuser
       parameters: []
@@ -49,10 +49,10 @@ paths:
           application/json:
             schema:
               allOf:
-                - $ref: '#/components/schemas/loginuserrequest'
-                - example:
-                    email: chris@gmail.com
-                    password: secret
+              - $ref: '#/components/schemas/loginuserrequest'
+              - example:
+                  email: chris@gmail.com
+                  password: secret
             example:
               email: chris@gmail.com
               password: secret
@@ -66,7 +66,7 @@ paths:
   /jobs:
     get:
       tags:
-        - jobs
+      - jobs
       summary: get all jobs
       operationId: getalljobs
       parameters: []
@@ -76,10 +76,10 @@ paths:
           headers: {}
       deprecated: false
       security:
-        - bearer: []
+      - bearer: []
     post:
       tags:
-        - jobs
+      - jobs
       summary: create job
       operationId: createjob
       parameters: []
@@ -89,10 +89,10 @@ paths:
           application/json:
             schema:
               allOf:
-                - $ref: '#/components/schemas/createjobrequest'
-                - example:
-                    company: tesla
-                    position: manager
+              - $ref: '#/components/schemas/createjobrequest'
+              - example:
+                  company: tesla
+                  position: manager
             example:
               company: tesla
               position: manager
@@ -103,11 +103,18 @@ paths:
           headers: {}
       deprecated: false
       security:
-        - bearer: []
-  /jobs/643e0f17724f8a29275e9062:
+      - bearer: []
+  /jobs/{id}:
+    parameters:
+    - in: path
+      name: id
+      schema:
+        type: string
+      required: true
+      description: the job id
     get:
       tags:
-        - jobs
+      - jobs
       summary: get single job
       operationId: getsinglejob
       parameters: []
@@ -117,10 +124,10 @@ paths:
           headers: {}
       deprecated: false
       security:
-        - bearer: []
+      - bearer: []
     patch:
       tags:
-        - jobs
+      - jobs
       summary: edit job
       operationId: editjob
       parameters: []
@@ -130,10 +137,10 @@ paths:
           application/json:
             schema:
               allOf:
-                - $ref: '#/components/schemas/editjobrequest'
-                - example:
-                    company: google
-                    position: manager
+              - $ref: '#/components/schemas/editjobrequest'
+              - example:
+                  company: google
+                  position: manager
             example:
               company: google
               position: manager
@@ -144,18 +151,18 @@ paths:
           headers: {}
       deprecated: false
       security:
-        - bearer: []
-  /job/{id}:
-    parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-        description: The job ID
+      - bearer: []
+  /jobs/{id}:
+  parameters:
+    - in: path
+      name: id
+      schema:
+        type: string
+      required: true
+      description: the job id
     delete:
       tags:
-        - jobs
+      - jobs
       summary: delete job
       operationId: deletejob
       parameters: []
@@ -165,15 +172,15 @@ paths:
           headers: {}
       deprecated: false
       security:
-        - bearer: []
+      - bearer: []
 components:
   schemas:
     registeruserrequest:
       title: registeruserrequest
       required:
-        - name
-        - email
-        - password
+      - name
+      - email
+      - password
       type: object
       properties:
         name:
@@ -189,8 +196,8 @@ components:
     loginuserrequest:
       title: loginuserrequest
       required:
-        - email
-        - password
+      - email
+      - password
       type: object
       properties:
         email:
@@ -203,8 +210,8 @@ components:
     createjobrequest:
       title: createjobrequest
       required:
-        - company
-        - position
+      - company
+      - position
       type: object
       properties:
         company:
@@ -217,8 +224,8 @@ components:
     editjobrequest:
       title: editjobrequest
       required:
-        - company
-        - position
+      - company
+      - position
       type: object
       properties:
         company:
@@ -234,5 +241,5 @@ components:
       scheme: bearer
 security: []
 tags:
-  - name: auth
-  - name: jobs
+- name: auth
+- name: jobs
